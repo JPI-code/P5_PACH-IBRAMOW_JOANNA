@@ -11,18 +11,18 @@
 
 
 const itemListContainer = document.getElementById("items");
-let items = [];
+let fetchedItems = [];
 const fetchItems = async () => {
     await fetch("http://localhost:3000/api/products")
     .then((response) => response.json())
-    .then((data) => (items = data))
+    .then((data) => (fetchedItems = data))
         .catch(err => console.log(err))
 };
 
 const displayItems = async () => {
     await fetchItems()
 
-    itemListContainer.innerHTML = items.map(
+    itemListContainer.innerHTML = fetchedItems.map(
         (item) =>  
     `
     <a href="./product.html?id=${item._id}">
