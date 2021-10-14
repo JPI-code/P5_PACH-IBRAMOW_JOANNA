@@ -33,8 +33,7 @@ const fetchProduct = async () => {
    //in order to add string + text
    .then((response) => response.json())
    .then((data) => (fetchedProduct= data))
-   // for debug only
-   // .then(() => console.log(fetchedProduct))
+
        .catch(err => console.log(err))
 }
 
@@ -60,3 +59,13 @@ selectedColorContainer.appendChild(newOption);
 });
 }
 displayProduct()
+// Define Local Storage
+const localStorage = window.localStorage;
+
+// Add Event Listener 
+document.getElementById("addToCart").addEventListener("click", () => {
+console.log("click");
+
+   localStorage.setItem("products",JSON.stringify([fetchedProduct]));
+console.log(localStorage)
+ });
