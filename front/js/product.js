@@ -61,11 +61,39 @@ selectedColorContainer.appendChild(newOption);
 displayProduct()
 // Define Local Storage
 const localStorage = window.localStorage;
+ // Function ADD ELEMENT
+ const addElementToCart = (fetchedProduct, color, quantity) => {
+   //check if Cart exists in Local storage - meaning somebody has already clicked on ADD TO CART
+   if (localStorage.getItem("cart")===null)
+   {
+      //creates empty array
+      localStorage.setItem("cart",JSON.stringify ([]))
+      console.log("Initialized Local Storage")
+  }
+  let cartItem = {
+     product: fetchedProduct,
+     color: color,
+     quantity: quantity
+  }
+  console.log(localStorage.cart)
+let cart = JSON.parse(localStorage.cart)
 
+cart.push(cartItem)
+
+localStorage.setItem("cart",JSON.stringify (cart))
+}
 // Add Event Listener 
 document.getElementById("addToCart").addEventListener("click", () => {
 console.log("click");
 
-   localStorage.setItem("products",JSON.stringify([fetchedProduct]));
+//Get selected proprietes 
+let color = document.getElementById("colors").value
+let quantity = document.getElementById("quantity").value
+
+//    localStorage.setItem("products",JSON.stringify([fetchedProduct]));
+// console.log(localStorage)
+addElementToCart(fetchedProduct, color, quantity)
+ 
 console.log(localStorage)
- });
+});
+
