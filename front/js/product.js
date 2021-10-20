@@ -64,7 +64,8 @@ const localStorage = window.localStorage;
  // Function ADD ELEMENT
  const addElementToCart = (fetchedProduct, color, quantity) => {
    //check if Cart exists in Local storage - meaning somebody has already clicked on ADD TO CART
-   if (localStorage.getItem("cart")===null)
+   // Or = || and '' means empty; null means nothing
+   if (localStorage.getItem("cart")===null || localStorage.getItem("cart")==='')
    {
       //creates empty array
       localStorage.setItem("cart",JSON.stringify ([]))
@@ -76,9 +77,22 @@ const localStorage = window.localStorage;
      quantity: quantity
   }
   console.log(localStorage.cart)
+  // DECLARE CART
 let cart = JSON.parse(localStorage.cart)
-
-cart.push(cartItem)
+console.log(cart)
+// Fonction to find product, && means "and"
+let foundProduct = cart.find(element => element.product._id===cartItem.product._id && element.color===cartItem.color)
+console.log(foundProduct)
+if (foundProduct===undefined){
+   cart.push(cartItem)
+}
+else {
+   //parseInt : change quantity to type: number
+   
+   foundProduct.quantity=parseInt(foundProduct.quantity)
+   // console.log(typeof foundProduct.quantity)
+   foundProduct.quantity+=parseInt(cartItem.quantity)
+}
 
 localStorage.setItem("cart",JSON.stringify (cart))
 }
