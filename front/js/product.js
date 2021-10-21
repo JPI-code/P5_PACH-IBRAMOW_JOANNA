@@ -44,6 +44,7 @@ const displayProduct = async () => {
 await fetchProduct()
 document.getElementById("title").innerText=fetchedProduct.name;
 // "name" comes from Product.js
+document.getElementsByClassName("item__img").innerHTML=fetchedProduct.imageUrl;
 document.getElementById("price").innerText=fetchedProduct.price;
 document.getElementById("description").innerText=fetchedProduct.description;
 let selectedColorContainer = document.getElementById("colors");

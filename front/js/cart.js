@@ -46,3 +46,54 @@ const displayItemsAddedToCart =() => {
         
 
 displayItemsAddedToCart()
+
+//ETAPE 1 extract data from FORM.Commander
+//1.
+//ETAPE 2 return CONTACT and ARRAY of Products ID
+
+// fetch("http://localhost:3000/api/products/order",
+//         {
+//             method: "POST",
+//             body: JSON.stringify(order),
+//             headers: { "Content-Type": "application/json" },
+//         }
+//     )
+// order = {
+// contact: {city,  name,  etc.}
+// products: fetchedProducts.map(product =>   product.id)
+// }
+// Léo Punsola1:47 PM
+// reconstituer contact 
+// const contact = retour du formulaire
+// puis
+// const order = {
+// contact:  contact,
+// products: fetchedProducts.map() }
+
+
+
+const formSubmit = document.getElementById("order")
+formSubmit.addEventListener("click", event =>{
+  console.log("test")
+  // const firstName = document.getElementById("firstName").value
+  // const lastName = document.getElementById("lastName").value
+  // const address = document.getElementById("address").value
+  // const city= document.getElementById("city").value
+  // const email = document.getElementById("email").value
+
+const contact = {
+  firstName: document.getElementById("firstName").value,
+  lastName: document.getElementById("lastName").value,
+  address: document.getElementById("address").value,
+  city: document.getElementById("city").value,
+  email: document.getElementById("email").value,
+}
+const orderContent ={
+  contact:contact,
+  products:fetchCartArray().map(cartItem => cartItem.product._id),
+}
+
+  console.log(orderContent)
+
+})
+
