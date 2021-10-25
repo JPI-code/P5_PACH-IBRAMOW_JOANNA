@@ -3,6 +3,19 @@ const fetchCartArray = () =>{
     let cart = JSON.parse(localStorage.getItem("cart"))
         return cart
 }
+//product price  because of product.js l.76 
+//display in order to calculate and show price
+const displayTotalPrice = () => {
+  let calculatedPrice = 0;
+  let calculatedQuantity=0;
+  const cart= fetchCartArray();
+  cart.forEach( itemAddedToTheCart => {
+    calculatedPrice +=itemAddedToTheCart.quantity*itemAddedToTheCart.product.price
+    calculatedQuantity +=parseInt(itemAddedToTheCart.quantity);
+  });
+  document.getElementById("totalQuantity").innerHTML = calculatedQuantity;
+  document.getElementById("totalPrice").innerHTML = calculatedPrice;
+}
 
 //fonction to display items
 const displayItemsAddedToCart =() => {
@@ -25,6 +38,8 @@ const displayItemsAddedToCart =() => {
                 <p>
                     ${item.product.price*item.quantity},00€
                     </p>
+                    <!--added new class in order to display item's color-->
+                    <p class="sofa_color">${item.color}</p>
               </div>
               <div class="cart__item__content__settings">
                 <div class="cart__item__content__settings__quantity">
@@ -39,7 +54,7 @@ const displayItemsAddedToCart =() => {
           </article>
             `
             )   
-        
+            displayTotalPrice();
         };
     
 
@@ -74,6 +89,7 @@ displayItemsAddedToCart()
 
 const formSubmit = document.getElementById("order")
 formSubmit.addEventListener("click", event =>{
+  event.preventDefault();
   console.log("test")
   // const firstName = document.getElementById("firstName").value
   // const lastName = document.getElementById("lastName").value
@@ -93,7 +109,45 @@ const orderContent ={
   products:fetchCartArray().map(cartItem => cartItem.product._id),
 }
 
-  console.log(orderContent)
+  console.log(orderContent);
+  window.location.href="./confirmation.html";
+
+  
 
 })
+addEventListener("load", event=> {
+  let min = 10000000
+  let max = 99999999
+
+    const orderId= Math.floor(Math.random() * (max - min)) + min;
+    document.getElementById("orderId").innerHTML = orderId;
+
+})
+
+// // Function to count number of product instantly when user changes the number of products directly in Cart
+// let quantityInputs = Array.from(document.getElementsByClassName("itemQuantity"));
+// // indicator indicates where in array is our searched color
+// let indicator = 0
+// let sofa_colors = Array.from(document.getElementsByClassName("sofa_color"));
+
+// quantityInputs.forEach(oneInput => {
+//   addEventListener("input", (event)=>{
+//     console.log(indicator);
+//     console.log(sofa_colors[indicator]);
+//   const currentSofaColor = sofa_colors[indicator]
+//   let cart =fetchCartArray();
+//   const id= oneInput.parentElement.parentElement.parentElement["data-id"]
+//   console.log(currentSofaColor)
+//   console.log(oneInput)
+//   let foundCartItem = cart.find(cartItem=> cartItem.color==currentSofaColor && cartItem.product._id)
+// foundCartItem.quantity=oneInput.value;
+// localStorage.setItem("cart",JSON.stringify (cart))
+// displayTotalPrice();
+// })
+ 
+//   indicator ++;
+//   if (indicator===fetchCartArray.length) indicator=0;
+
+// });
+
 
