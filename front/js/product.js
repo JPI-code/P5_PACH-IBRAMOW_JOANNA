@@ -1,4 +1,9 @@
+//USING PROPERTY  WINDOW.LOCATION.HREF TO GET/RETURN THE ENTIRE URL OF THE CURRENT PAGE 
+
 console.log(window.location.href)
+
+//USING SLICE METHOD TO OBTAIN PRODUCT ID FROM URL STRING
+//SLICE METHOD EXTRACTS PART OF A STRING URL AND RETURNS THE EXTRACTED PART IN A NEW STRING.
 
 const getProductId = () => {
    let url = window.location.href; 
@@ -13,18 +18,8 @@ const getProductId = () => {
 getProductId ()
 
 
-// http://localhost:3000/api/products
 
-// const itemListContainer = document.getElementById("items");
-// let fetchedItems = [];
-// const fetchItems = async () => {
-//     await fetch("http://localhost:3000/api/products")
-//     .then((response) => response.json())
-//     .then((data) => (fetchedItems = data))
-//         .catch(err => console.log(err))
-// };
-
-
+//FUNCTION TO FETCH PRODUCT DETAILS FROM API BASED ELEMENT ID
 const itemProductContainer =document.getElementById("item");
 let fetchedProduct;
 const fetchProduct = async () => {
@@ -38,8 +33,9 @@ const fetchProduct = async () => {
 }
 
 fetchProduct ()
-// console.log(fetchedProduct)
 
+//FUNCTION TO DISPLAY PRODUCT WITH ITS DETAILS ON PRODUCT PAGE
+//USING METHOD CREATEELEMENT AND FUNCTION FOREACH TO CREATE NEW OPTION FOR COLOR ARRAY 
 const displayProduct = async () => {
 await fetchProduct()
 document.getElementById("title").innerText=fetchedProduct.name;
@@ -52,7 +48,7 @@ let selectedColorContainer = document.getElementById("colors");
 fetchedProduct.colors.forEach(color => {
    // color - my variable, one element from array COLORS
    let newOption = document.createElement("option")
-   // createElement is a methode
+   // createElement is a method
    newOption.innerText=color;
    newOption.value=color;
    // <option value="vert">vert</option>
@@ -60,11 +56,11 @@ selectedColorContainer.appendChild(newOption);
 });
 }
 displayProduct()
-// Define Local Storage
+//DEFINE LOCAL STORAGE 
 const localStorage = window.localStorage;
  // Function ADD ELEMENT
  const addElementToCart = (fetchedProduct, color, quantity) => {
-   //check if Cart exists in Local storage - meaning somebody has already clicked on ADD TO CART
+   //check if Cart exists in Local storage - meaning: check if user has already clicked on ADD TO CART
    // Or = || and '' means empty; null means nothing
    if (localStorage.getItem("cart")===null || localStorage.getItem("cart")==='')
    {
@@ -81,7 +77,7 @@ const localStorage = window.localStorage;
   // DECLARE CART
 let cart = JSON.parse(localStorage.cart)
 console.log(cart)
-// Fonction to find product, && means "and"
+//FONCTION TO FIND PRODUCT,  && means "and"
 let foundProduct = cart.find(element => element.product._id===cartItem.product._id && element.color===cartItem.color)
 console.log(foundProduct)
 if (foundProduct===undefined){
@@ -97,7 +93,7 @@ else {
 
 localStorage.setItem("cart",JSON.stringify (cart))
 }
-// Add Event Listener 
+//ADDING ADDEVENTLISTENER - A METHOD LOOKING FOR SPECIFIED EVENT - IN THIS CASE IT IS USER'S ACTION: CLICK
 document.getElementById("addToCart").addEventListener("click", () => {
 console.log("click");
 

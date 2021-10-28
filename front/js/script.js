@@ -1,13 +1,6 @@
-// /**
-//  * This function will edit Element
-//  * @param {string} id 
-//  */
 
-// function editElement (id){
-//     element = document.getElementById(id)
-//     console.log(element.children)
-// }
-// editElement(id="items");
+
+//FUNCTION TO FETCH ALL PRODUCTS BY THEIR ID FROM API 
 
 
 const itemListContainer = document.getElementById("items");
@@ -19,6 +12,7 @@ const fetchItems = async () => {
         .catch(err => console.log(err))
 };
 
+//FUNCTION TO DISPLAY PREVIOUSLY FETCHED PRODUCTS ON HOMEPAGE USING MAPPING METHOD
 const displayItems = async () => {
     await fetchItems()
 
@@ -36,7 +30,7 @@ const displayItems = async () => {
     )   
 
 };
-
+//CALL THE FUNCTION TO EXECUTE/LAUNCH IT
 displayItems ();
 
 
